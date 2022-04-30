@@ -35,8 +35,14 @@ class ViewController: UIViewController {
     }
     
     @objc func updateTime() {
-        nowTimeLabel.text = String(count)
-        count = count + 1
+//        nowTimeLabel.text = String(count)
+//        count = count + 1
+        
+        let date = NSDate()
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss EEE"
+        nowTimeLabel.text = "현재시간 : " + formatter.string(from: date as Date)
     }
     
 }
