@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     let oneMin = 10.0
     var count = 0
     var alarmTime : String?
+    var alertState = false
 
     
     @IBOutlet var nowTimeLabel: UILabel!
@@ -53,8 +54,20 @@ class ViewController: UIViewController {
         formatter.dateFormat = "hh:mm aaa"
         let currentTime = formatter.string(from: date as Date)
         if (currentTime == alarmTime) {
-            view.backgroundColor = UIColor.red
-            Timer.scheduledTimer(timeInterval: oneMin, target: self, selector: colorSelector, userInfo: nil, repeats: false)
+            // 알람 시간이 되면 배경색 red, 10초 후 배경색 white
+//            view.backgroundColor = UIColor.red
+//            Timer.scheduledTimer(timeInterval: oneMin, target: self, selector: colorSelector, userInfo: nil, repeats: false)
+            // 알람 시간이 되면 alert 창 띄우기
+            if !alertState {
+                let alertPop = UIAlertController(title: "알림", message: "설정된 시간 입니다!!!", preferredStyle: UIAlertController.Style.alert)
+                let ok = UIAlertAction(title: "네, 알겠습니다.", style: UIAlertAction.Style.default, handler: nil)
+                alertPop.addAction(ok)
+                present(alertPop, animated: true, completion: nil)
+                alertState = true
+            }
+            else {
+                alertState = false
+            }
         }
     }
     
